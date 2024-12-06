@@ -50,7 +50,7 @@ func moduleInit() bool {
 }
 
 func copyMainFile() bool {
-	return utils.CopyFile("copy/main.go", "main.go", ProjectName)
+	return utils.CopyFile("copy/main.go", "main.go", ProjectName,"","")
 }
 
 func insallGoFiber() bool {
@@ -68,7 +68,7 @@ func installEnvLibrary() bool {
 		fmt.Println("go env successfully installed")
 	}
 
-	isEnvFileCopied := utils.CopyFile("copy/.env.example", "env.example", ProjectName)
+	isEnvFileCopied := utils.CopyFile("copy/.env.example", ".env.example", ProjectName,"","")
 
 	if isInstalled {
 		fmt.Println("env File copied succesfully")
@@ -111,11 +111,11 @@ var allfilePaths []Filepath = []Filepath{
 	{copyPath: "copy/utils/env.go", pastePath: "utils/env.go"},
 	{copyPath: "copy/middleware/auth.go", pastePath: "middleware/auth.go"},
 	{copyPath: "copy/route/route.go", pastePath: "route/route.go"},
-
+	{copyPath: "copy/model/migration.go", pastePath: "model/migration.go"},
 }
 
 func copyOtherFile() {
 	for _, v := range allfilePaths {
-		utils.CopyFile(v.copyPath, v.pastePath, ProjectName)
+		utils.CopyFile(v.copyPath, v.pastePath, ProjectName,"","")
 	}
 }

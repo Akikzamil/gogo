@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func CopyFile(cliFilePath string, execFiltPath string,moduleName string) bool {
+func CopyFile(cliFilePath string, execFiltPath string,moduleName string, replaceFrom string,replaceTo string) bool {
 	execPath, err := os.Executable()
 	if err != nil {
 		fmt.Println("Error getting executable path:", err)
@@ -36,6 +36,10 @@ func CopyFile(cliFilePath string, execFiltPath string,moduleName string) bool {
 	originalText := string(content)
 
 	modifiedText := strings.ReplaceAll(originalText, "gogo", moduleName);
+	
+	if(replaceFrom != ""){
+		modifiedText = strings.ReplaceAll(modifiedText, replaceFrom, replaceTo);
+	}
 
 	dir := filepath.Dir(destFile)
 	err2:= os.MkdirAll(dir, 0755)

@@ -11,29 +11,43 @@ import (
 )
 
 func main() {
-	app := fiber.New();
-	config.InitializeDatabaseConnection();
+	config.InitializeDatabaseConnection()
 
-	route.SetUpRoutes(app);
+	var commandName string
+	if len(os.Args) > 1 {
+		commandName = os.Args[1]
+	}
 
-	port := getPort();
-	app.Listen(fmt.Sprintf(":"+port))
+	switch commandName {
+	case "migrate":
+		config.RunAllMigrations();
+	default:
+		run();
+	}
 }
 
+func run() {
+	app := fiber.New()
 
-func getPort() string{
-	port:= "";
-	err := godotenv.Load();
+	route.SetUpRoutes(app)
+
+	port := getPort()
+	app.Listen(fmt.Sprintf(":" + port))
+}
+
+func getPort() string {
+	port := ""
+	err := godotenv.Load()
 
 	if err != nil {
 		port = "3000"
-	}else{
-	 envPort := os.Getenv("PORT");
-	 if(envPort!="") {
-		port = envPort
-	 }else{
-		port = "3000"
-	 }
+	} else {
+		envPort := os.Getenv("PORT")
+		if envPort != "" {
+			port = envPort
+		} else {
+			port = "3000"
+		}
 	}
 	return port
 }

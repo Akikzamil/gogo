@@ -11,5 +11,9 @@ func main() {
 	switch(commandName) {
 	case "init":
 		command.Init();
+	case "make":
+		command.Make();
+	case "migrate":
+		command.RunMigration();
 	}
 }

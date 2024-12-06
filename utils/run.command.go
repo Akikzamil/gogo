@@ -14,6 +14,8 @@ func RunCommand(name string, arg ...string) bool {
 		return false
 	}
 
+	fmt.Println(string(output))
+
 	return true
 
 }
