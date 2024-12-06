@@ -41,5 +41,6 @@ func InitializeDatabaseConnection() bool {
 
 
 func RunAllMigrations() {
-	DB.AutoMigrate(&model.Migration{})
+	DB.AutoMigrate(&model.Migration{});
+	
 }

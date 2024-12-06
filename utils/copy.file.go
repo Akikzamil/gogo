@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func CopyFile(cliFilePath string, execFiltPath string,moduleName string, replaceFrom string,replaceTo string) bool {
+func CopyFile(cliFilePath string, execFiltPath string,moduleName string, replaceFrom string,replaceTo string,replaceFrom2 string, replaceTo2 string,replaceFrom3 string, replaceTo3 string) bool {
 	execPath, err := os.Executable()
 	if err != nil {
 		fmt.Println("Error getting executable path:", err)
@@ -39,6 +39,14 @@ func CopyFile(cliFilePath string, execFiltPath string,moduleName string, replace
 	
 	if(replaceFrom != ""){
 		modifiedText = strings.ReplaceAll(modifiedText, replaceFrom, replaceTo);
+	}
+
+	if(replaceFrom2 != ""){
+		modifiedText = strings.ReplaceAll(modifiedText, replaceFrom2, replaceTo2);
+	}
+
+	if(replaceFrom3 != ""){
+		modifiedText = strings.ReplaceAll(modifiedText, replaceFrom3, replaceTo3);
 	}
 
 	dir := filepath.Dir(destFile)

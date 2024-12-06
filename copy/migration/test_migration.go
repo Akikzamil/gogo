@@ -1,4 +1,4 @@
-package gogo
+package migration
 
 import (
 	"gogo/config"
