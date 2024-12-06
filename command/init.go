@@ -30,7 +30,9 @@ func Init() {
 		return
 	}
 
+	
 	copyOtherFile()
+	installOtherDependencies();
 
 }
 
@@ -90,6 +92,15 @@ func installGorm() bool {
 	return isGormInstalled && isMysqlnstalled && isPosgresSqlInstalled && isSqliteDriverInstalled
 }
 
+
+func installOtherDependencies() bool{
+	isFiberJwtInstalled := utils.RunCommand("go", "get", "-u", "github.com/gofiber/contrib/jwt");
+	isJwtInstalled := utils.RunCommand("go", "get", "-u", "github.com/golang-jwt/jwt/v5");
+	isTidyCommandRun := utils.RunCommand("go", "mod", "tidy");
+
+	return isFiberJwtInstalled && isJwtInstalled && isTidyCommandRun
+}
+
 type Filepath struct {
 	copyPath  string
 	pastePath string
@@ -98,6 +109,8 @@ type Filepath struct {
 var allfilePaths []Filepath = []Filepath{
 	{copyPath: "copy/config/database.go", pastePath: "config/database.go"},
 	{copyPath: "copy/utils/env.go", pastePath: "utils/env.go"},
+	{copyPath: "copy/middleware/auth.go", pastePath: "middleware/auth.go"},
+	{copyPath: "copy/route/route.go", pastePath: "route/route.go"},
 
 }
 

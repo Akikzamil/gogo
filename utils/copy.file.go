@@ -49,6 +49,6 @@ func CopyFile(cliFilePath string, execFiltPath string,moduleName string) bool {
 		return false
 	}
 
-	fmt.Println("Main File created")
+	fmt.Println("File created")
 	return true
 }

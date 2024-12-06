@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"gogo/config"
+	"gogo/route"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
@@ -13,9 +14,7 @@ func main() {
 	app := fiber.New();
 	config.InitializeDatabaseConnection();
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World!")
-	})
+	route.SetUpRoutes(app);
 
 	port := getPort();
 	app.Listen(fmt.Sprintf(":"+port))
