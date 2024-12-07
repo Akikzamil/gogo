@@ -26,6 +26,8 @@ func main() {
 	switch commandName {
 	case "migrate":
 		RunAllMigrations();
+	case "migrate:rollback":
+		RunMigrationDown();
 	default:
 		run();
 	}
@@ -77,7 +79,7 @@ func RunAllMigrations() {
 			continue;
 		}
 		var mig model.Migration
-		config.DB.First(&mig).Where("migration = ?", file.Name);
+		config.DB.Where("migration = ?", file.Name).First(&mig);
 
 		if mig.Migration != "" {
 			continue
@@ -86,8 +88,7 @@ func RunAllMigrations() {
 		st:= migration.MigrtionStruct{}
 		splittedFileName:= strings.Split(file.Name(),".")[0];
 		fileName := "Up"+ splittedFileName;
-		fmt.Println(file.Name())
-		fmt.Println(fileName)
+
 		method := reflect.ValueOf(st).MethodByName(fileName);
 		if !method.IsValid() {
 			fmt.Println("Method not found!")
@@ -102,6 +103,36 @@ func RunAllMigrations() {
 			migrationModel2.Batch = currentBatch;
 			migrationModel2.Migration = file.Name()
 			config.DB.Create(&migrationModel2)
+		}
+	}
+}
+
+
+func RunMigrationDown() {
+	var migrationModel1  model.Migration ;
+	config.DB.Order("batch DESC").Select("batch").First(&migrationModel1);
+	currentBatch := migrationModel1.Batch;
+
+	var migrations []model.Migration;
+	config.DB.Find(&migrations, "batch = ? ", currentBatch)
+
+	for _,m := range migrations {
+		path := m.Migration;
+		splittedFileName:= strings.Split(path,".")[0];
+		fileName := "Down"+ splittedFileName;
+		st:= migration.MigrtionStruct{}
+		method := reflect.ValueOf(st).MethodByName(fileName);
+		if !method.IsValid() {
+			fmt.Println("Method not found!")
+			continue
+		}
+
+		args := []reflect.Value{}
+		result :=method.Call(args);
+
+		if(result[0].Interface() == nil ) {
+			var mig model.Migration;
+			config.DB.Delete(&mig, "migration =?", path)
 		}
 	}
 }
