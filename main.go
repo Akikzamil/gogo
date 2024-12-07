@@ -13,6 +13,8 @@ func main() {
 		command.Init();
 	case "make":
 		command.Make();
+	case "migrate:rollback":
+		command.RunDownMigration();
 	case "migrate":
 		command.RunMigration();
 	}

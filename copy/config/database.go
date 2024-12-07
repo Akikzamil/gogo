@@ -2,9 +2,7 @@ package config
 
 import (
 	"fmt"
-	"gogo/model"
 	"gogo/utils"
-
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -39,8 +37,3 @@ func InitializeDatabaseConnection() bool {
 	return err == nil;
 }
 
-
-func RunAllMigrations() {
-	DB.AutoMigrate(&model.Migration{});
-	
-}

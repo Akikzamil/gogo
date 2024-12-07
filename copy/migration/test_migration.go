@@ -5,10 +5,12 @@ import (
 	"gogo/model"
 )
 
-func Up() {
-	config.DB.Migrator().CreateTable(&model.GOGO{})
+func (m MigrtionStruct) Up() error {
+	err := config.DB.Migrator().CreateTable(&model.GOGO{})
+	return err;
 }
 
-func Down() {
-	config.DB.Migrator().DropTable(&model.GOGO{})
+func (m MigrtionStruct) Down() error {
+	err := config.DB.Migrator().DropTable(&model.GOGO{})
+	return err;
 }

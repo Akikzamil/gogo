@@ -1,8 +1,10 @@
 package migration
 
 
-func Up2() {
+func (m MigrtionStruct) Up2() error {
+	return nil
 }
 
-func Down2() {
+func (m MigrtionStruct) Down2() error {
+	return nil
 }

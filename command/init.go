@@ -112,6 +112,8 @@ var allfilePaths []Filepath = []Filepath{
 	{copyPath: "copy/middleware/auth.go", pastePath: "middleware/auth.go"},
 	{copyPath: "copy/route/route.go", pastePath: "route/route.go"},
 	{copyPath: "copy/model/migration.go", pastePath: "model/migration.go"},
+	{copyPath: "copy/migration/create_migration.go", pastePath: "migration/create_migration.go"},
+	{copyPath: "copy/migration/mirgration.struct.go", pastePath: "migration/mirgration.struct.go"},
 }
 
 func copyOtherFile() {
