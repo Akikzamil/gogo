@@ -1,6 +1,6 @@
 # GOGO
 
-A framework in golang for handaling big monolithic projects.
+A framework in golang for handaling big monolithic projects By using GoFiber and GORM.
 
 ## Features
 
@@ -19,10 +19,35 @@ add path of the file into the env
 go build -o gogo.exe
 ```
 
-## Initialization
-Run the command
+## Starting
+Run the command:
 ```
-gogo init gogo
+gogo init projectName.
 ```
 
-There will be a new project created
+There will be a new project created.
+
+copy the `.env.example` file to `.env` file.
+
+set the Database connection with proper values.
+
+## Run Migration
+```
+gogo migrate
+```
+## Migration Rollback
+```
+gogo migrate:rollback
+```
+## Rollback Migration
+```
+gogo migrate:rollback
+```
+## Make Model
+```
+gogo make model cat
+```
+## Make Model With migration
+```
+gogo make model cat --migration
+```
