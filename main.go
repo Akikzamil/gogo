@@ -1,11 +1,16 @@
 package main
 
 import (
+	"fmt"
 	"gogo/command"
 	"os"
 )
 
 func main() {
+	if(len(os.Args)==1) {
+		fmt.Println("Wellcome to golang");
+		return;
+	}
 	commandName := os.Args[1];
 
 	switch(commandName) {

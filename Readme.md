@@ -6,3 +6,15 @@ A framework in golang for handaling big monolithic projects.
 
 - Boilerplate Generating
 - Migration Handling
+
+## Instalation
+First of all download the project
+```
+git clone https://github.com/Akikzamil/gogo.git
+```
+add path of the file into the env
+
+## Dev build
+```
+go build -o gogo.exe
+```
