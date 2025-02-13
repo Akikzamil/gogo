@@ -18,3 +18,11 @@ add path of the file into the env
 ```
 go build -o gogo.exe
 ```
+
+## Initialization
+Run the command
+```
+gogo init gogo
+```
+
+There will be a new project created
